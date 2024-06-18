@@ -1,46 +1,49 @@
-const city = require("../models/city");
-const city = require("../models/city");
 const { CityRepository } = require("../repository/index");
 
-class cityService {
+class CityService {
   constructor() {
     this.cityRepository = new CityRepository();
   }
-  async createCity() {
+
+  async createCity(data) {
     try {
       const city = await this.cityRepository.createCity(data);
       return city;
     } catch (error) {
-      console.log("something went wrong in service layer");
-      throw { error };
+      console.error("Something went wrong in the service layer:", error);
+      throw error;
     }
   }
+
   async deleteCity(cityId) {
-      try {
-          const result = await this.cityRepository.deleteCity(cityId);
-          return result;
+    try {
+      const result = await this.cityRepository.deleteCity(cityId);
+      return result;
     } catch (error) {
-      console.log("something went wrong in service layer");
-      throw { error };
+      console.error("Something went wrong in the service layer:", error);
+      throw error;
     }
   }
-  async updateCity(cityId,data) {
-      try {
-          const city = await this.cityRepository.updateCity(cityId, data);
-          return city;
+
+  async updateCity(cityId, data) {
+    try {
+      const city = await this.cityRepository.updateCity(cityId, data);
+      return city;
     } catch (error) {
-      console.log("something went wrong in service layer");
-      throw { error };
+      console.error("Something went wrong in the service layer:", error);
+      throw error;
     }
   }
+
   async getCity(cityId) {
-      try {
-          const city = await this.cityRepository.getCity(cityId);
-          return city;
+    try {
+      const city = await this.cityRepository.getCity(cityId);
+      return city;
     } catch (error) {
-      console.log("something went wrong in service layer");
-      throw { error };
+      console.error("Something went wrong in the service layer:", error);
+      throw error;
     }
   }
 }
-module.exports = cityService;
+
+module.exports = CityService;
