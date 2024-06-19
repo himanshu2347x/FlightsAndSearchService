@@ -13,12 +13,18 @@ class CityRepository {
   }
 
   async updateCity(cityId, data) {
-    try {
-      const city = await City.update(data, {
-        where: {
-          id: cityId,
-        },
-      });
+      try {
+        // below approach also works but return in form of array having detail how many row are affected
+        // const city = await City.update(data, {
+        //   where: {
+        //     id: cityId,
+        //     }
+          //     });
+          
+          //this approach return the updated city
+      const ciy = await City.findByPk(cityId);
+      city.name = data.name;
+      await city.save();
       return city;
     } catch (error) {
       console.log("Something Went Wrong in the repository layer");
@@ -35,7 +41,7 @@ class CityRepository {
       throw { error };
     }
   }
-    
+
   async deleteCity(cityId) {
     try {
       await City.destroy({
