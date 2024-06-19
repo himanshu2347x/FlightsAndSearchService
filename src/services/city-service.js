@@ -8,10 +8,11 @@ class CityService {
   async createCity(data) {
     try {
       const city = await this.cityRepository.createCity(data);
+      console.log("Call is made to repository layer for", city);
       return city;
     } catch (error) {
       console.error("Something went wrong in the service layer:", error);
-      throw error;
+      throw error; 
     }
   }
 
@@ -21,7 +22,7 @@ class CityService {
       return result;
     } catch (error) {
       console.error("Something went wrong in the service layer:", error);
-      throw error;
+      throw error; 
     }
   }
 
@@ -31,17 +32,18 @@ class CityService {
       return city;
     } catch (error) {
       console.error("Something went wrong in the service layer:", error);
-      throw error;
+      throw error; 
     }
   }
 
   async getCity(cityId) {
     try {
-      const city = await this.cityRepository.getCity(cityId);
+        const city = await this.cityRepository.getCity(cityId);
+        console.log("inside a service");
       return city;
     } catch (error) {
       console.error("Something went wrong in the service layer:", error);
-      throw error;
+      throw error; 
     }
   }
 }

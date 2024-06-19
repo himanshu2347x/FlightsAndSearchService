@@ -20,24 +20,27 @@ const create = async (req, res) => {
     });
   }
 };
+
 const get = async (req, res) => {
   try {
-    const result = await cityService.getCity(req.params.id);
+    const response = await cityService.getCity(req.params.id);
     return res.status(200).json({
-      data: result,
+      data: response,
       success: true,
       message: "Successfully fetched a city",
       err: {},
     });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       data: {},
       success: false,
-      message: "Not able to get a City",
-      err: {},
+      message: "Not able to get the city",
+      err: error,
     });
   }
 };
+
 const update = async (req, res) => {
   try {
     const result = await cityService.updateCity(req.params.id, req.body);
@@ -56,13 +59,14 @@ const update = async (req, res) => {
     });
   }
 };
+
 const destroy = async (req, res) => {
   try {
     const result = await cityService.deleteCity(req.params.id);
     return res.status(200).json({
       data: result,
       success: true,
-      message: "Successfully fetched a city",
+      message: "Successfully deleted a city",
       err: {},
     });
   } catch (error) {
@@ -74,3 +78,9 @@ const destroy = async (req, res) => {
     });
   }
 };
+module.exports = {
+    create,
+    destroy,
+    get,
+    update
+}
