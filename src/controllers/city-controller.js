@@ -78,9 +78,29 @@ const destroy = async (req, res) => {
     });
   }
 };
+
+const getAll = async (req, res) => {
+  try {
+    const cities = await cityService.getAllCities();
+    return res.status(200).json({
+      data: cities,
+      success: true,
+      message: "Successfully fethed all the cities",
+      err: {},
+    });
+  } catch (error) {
+    return res.status(500).json({
+      data: {},
+      success: false,
+      message: "Not able to delete a City",
+      err: {},
+    });
+  }
+}
 module.exports = {
     create,
     destroy,
     get,
-    update
+  update,
+    getAll
 }
