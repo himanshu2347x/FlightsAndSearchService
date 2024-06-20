@@ -1,4 +1,5 @@
 const { CityService } = require("../services/index");
+const { Op } = require("sequelize");
 const cityService = new CityService();
 
 const create = async (req, res) => {
@@ -81,7 +82,7 @@ const destroy = async (req, res) => {
 
 const getAll = async (req, res) => {
   try {
-    const cities = await cityService.getAllCities();
+    const cities = await cityService.getAllCities(req.query);
     return res.status(200).json({
       data: cities,
       success: true,
@@ -92,7 +93,7 @@ const getAll = async (req, res) => {
     return res.status(500).json({
       data: {},
       success: false,
-      message: "Not able to delete a City",
+      message: "Not able to fetch the cities",
       err: {},
     });
   }
